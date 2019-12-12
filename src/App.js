@@ -3,11 +3,11 @@ import logo from "./assets/img/logo.svg";
 import img_attivita_1 from "./assets/img/attivita_1.jpg";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
+import axios from "axios";
 
-import tree from "./constants/tree";
-import results from "./constants/results";
-import steps from "./constants/steps";
-import { parse } from "path";
+// import tree from "./constants/tree";
+// import results from "./constants/results";
+// import steps from "./constants/steps";
 
 class App extends Component {
   constructor(props) {
@@ -16,12 +16,13 @@ class App extends Component {
       step: 0,
       //Array dove sono tenute le scelte
       checkTree: [],
+
       //API Steps
-      stepStore: steps,
+      stepStore: [],
       //API Tree
-      treeStore: tree,
+      treeStore: [],
       //API Results
-      resultStore: results,
+      resultStore: [],
 
       //Classe navigazione che attiva e disattiva il cosino verde
       navActive: [0, "active"]
@@ -67,6 +68,8 @@ class App extends Component {
     };
     const resultsArr = navigazione(checkTree, treeStore, step);
     console.log(resultsArr);
+
+    //Faccio la map di resultStore (API) dove resultArr uguale a resultStore mi credo l'elemento
     return resultStore.map((element, index) => {
       for (let i = 0; i < resultsArr.length; i++) {
         if (resultsArr[i] === index + 1) {
@@ -139,6 +142,21 @@ class App extends Component {
       navActive: [parseInt(step + 1), "active"]
     });
   };
+  componentDidMount() {
+    axios
+      .get(
+        `https://mctsuite.it.nttdata-emea.com/preview/tag_ntt_project_work/wizard_config.json`
+      )
+      .then(res => {
+        const persons = res.data;
+        console.log(persons.results);
+        this.setState({
+          treeStore: persons.tree,
+          resultStore: persons.results,
+          stepStore: persons.steps
+        });
+      });
+  }
 
   render() {
     const {
