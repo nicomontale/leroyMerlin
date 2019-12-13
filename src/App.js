@@ -169,7 +169,7 @@ class App extends Component {
     } = this.state;
 
     const navArray = stepStore.map((element, index) => {
-      if (navActive[0] == index) {
+      if (navActive[0] === index) {
         return (
           <Navbar
             navClass={navActive[1]}
@@ -226,13 +226,13 @@ class App extends Component {
             <span>CONTINUA</span>
           </div>
         ) : (
-          <div
-            className="button disabled"
-            onClick={checkTree[step] !== undefined ? this.nextStep : null}
-          >
-            <span>CONTINUA</span>
-          </div>
-        )}
+            <div
+              className="button disabled"
+              onClick={checkTree[step] !== undefined ? this.nextStep : null}
+            >
+              <span>CONTINUA</span>
+            </div>
+          )}
       </div>
     );
   }
