@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-
+import auth from './auth';
 import Main from './main';
 import { Layout, Content } from 'react-mdl';
 class SelectedBox extends React.Component {
@@ -39,7 +39,7 @@ class SelectedBox extends React.Component {
     return (
 
       <div className="App">
-
+        <h3>Benvenuto {auth.getUser().firstName}</h3>
 
         <select >
           {options}

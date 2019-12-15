@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Main from './main';
 import * as serviceWorker from './serviceWorker';
-
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
 
 
-
-    <Main />
+    <BrowserRouter>
+        <Main />
+    </BrowserRouter>
 
     , document.getElementById('root'));
 
