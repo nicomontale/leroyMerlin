@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import auth from './auth';
+
+
 
 class SelectedBox extends React.Component {
   constructor(props) {
@@ -32,13 +33,14 @@ class SelectedBox extends React.Component {
 
   render() {
     const { stores } = this.state;
+    const { username } = this.props;
     const options = stores.map(store => (
       <option key={store.storeCode} value={store.storeCode}>{store.storeName}</option>
     ))
     return (
 
       <div className="App">
-        <h3>Benvenuto {auth.getUser().firstName}</h3>
+        <h3>Benvenuto {username}</h3>
 
         <select >
           {options}

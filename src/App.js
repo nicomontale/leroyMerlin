@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logo from "./assets/img/logo.svg";
-import img_attivita_1 from "./assets/img/attivita_1.jpg";
+
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import axios from "axios";
@@ -86,7 +86,7 @@ class App extends Component {
     });
   };
   showStep = () => {
-    const { stepStore, step, checkTree, treeStore, resultStore } = this.state;
+    const { stepStore, step } = this.state;
     const stepArr = [];
     for (let i = 0; i < stepStore.length; i++) {
       stepArr[i] = stepStore[i].answers;
@@ -163,9 +163,8 @@ class App extends Component {
       stepStore,
       navActive,
       step,
-      treeStore,
-      checkTree,
-      resultStore
+      checkTree
+
     } = this.state;
 
     const navArray = stepStore.map((element, index) => {

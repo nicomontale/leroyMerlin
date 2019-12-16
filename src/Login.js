@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import StoreLocations from './StoreLocations';
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
 class Login extends Component {
@@ -81,10 +81,10 @@ class Login extends Component {
         console.log("Username" + this.state.password)
     }
     render() {
-        const { username, password, status } = this.state;
+        const { username, password } = this.state;
         console.log(username, password);
         if (this.state.redirect) {
-            return (<Redirect to={'/StoreLocations'} />)
+            return (<Redirect to="/StoreLocations" render={(props) => <StoreLocations {...props} title={`Props through render`} />} />)
         }
         return (
 

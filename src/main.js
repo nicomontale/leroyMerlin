@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import StoreLocations from './StoreLocations';
-import Login from './Login';
+
 import App from './App';
 import LandingPage from './landingpage';
 class Main extends Component {
