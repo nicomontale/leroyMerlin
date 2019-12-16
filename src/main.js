@@ -10,7 +10,7 @@ class Main extends Component {
         return (
 
             <Switch>
-                <Route exact path="/" component={Login} />
+                <Route exact path="/" component={LandingPage} />
                 <Route exact path="/StoreLocations" component={StoreLocations} />
                 <Route exact path="/app" component={App} />
 

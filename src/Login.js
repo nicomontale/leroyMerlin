@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PostData from './PostData';
+
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
 class Login extends Component {
@@ -7,34 +7,22 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            status: '',
             username: '',
             password: '',
             redirect: false
         }
         this.onChange = this.onChange.bind(this);
-        this.login = this.login.bind(this);
+
         this.loginFunction = this.loginFunction.bind(this);
-        // this.loginTwo = this.loginTwo.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
     }
 
-    login() {
-        PostData(this.state).then((result => {
-            let responseJSON = result;
 
-            if (responseJSON.token) {
-                sessionStorage.setItem('userData', responseJSON)
-                this.setState({
-                    redirect: true
-                })
-
-            } else {
-                alert('no data');
-            }
-        }))
-    }
 
 
     getLoginInfo(id, authToken) {
+
         axios({
             method: "GET",
             url: `https://api-dev-commercio.leroymerlin.it/api/v1/customer/1_0_0/profilelight/get/${id}`,
@@ -46,6 +34,8 @@ class Login extends Component {
         }).then(res => console.log(res.data));
     }
     loginFunction(username, password) {
+
+
         axios({
             method: "POST",
             url:
@@ -61,8 +51,11 @@ class Login extends Component {
             }
         }).then(res => {
             const response = res.data.status;
+
             if (response === "KO") {
-                alert("errorio");
+
+                console.log("errorio");
+
             } else {
 
                 const id = res.data.content.customerID;
@@ -74,15 +67,23 @@ class Login extends Component {
             }
         });
     }
+
     onChange(e) {
+
         this.setState(
-            { [e.target.name]: e.target.value })
+            { username: e.target.value })
+        console.log("Username" + this.state.username)
+    }
+    onChangePassword(e) {
+
+        this.setState(
+            { password: e.target.value })
+        console.log("Username" + this.state.password)
     }
     render() {
-        const { username, password } = this.state;
+        const { username, password, status } = this.state;
+        console.log(username, password);
         if (this.state.redirect) {
-            return (<Redirect to={'/StoreLocations'} />)
-        } if (sessionStorage.getItem('userData')) {
             return (<Redirect to={'/StoreLocations'} />)
         }
         return (
@@ -90,7 +91,7 @@ class Login extends Component {
             <div className='wrapper'>
                 <div className='form-wrapper'>
                     <h1>Create Account</h1>
-                    <form >
+                    <form  >
                         <div className='firstName'>
                             <label htmlFor='firstName'>First Name</label>
                             <input
@@ -111,13 +112,13 @@ class Login extends Component {
 
                                 placeholder='Password'
                                 name='password'
-                                onChange={this.onChange} value={password}
+                                onChange={this.onChangePassword} value={password}
 
                             ></input>
 
                         </div>
                         <div className='createAccount'>
-                            <button onClick={this.loginFunction(this.state.username, this.state.password)} type='submit' to="/StoreLocations">Create Acoount</button>
+                            <button onClick={this.loginFunction(username, password)} type='submit' to="/StoreLocations">Create Acoount</button>
 
                         </div>
                     </form>

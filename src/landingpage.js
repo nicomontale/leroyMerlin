@@ -1,12 +1,12 @@
 import React from 'react';
-import LoginForm from './LoginForm';
+import Login from './Login';
 import './LoginForm.css'
 
 class LandingPage extends React.Component {
     render() {
-        return(
+        return (
             <div>
-            <LoginForm/>
+                <Login />
             </div>
         )
     }
