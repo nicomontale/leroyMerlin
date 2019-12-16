@@ -23,6 +23,8 @@ const login = (firstName, password) => new Promise((resolve, reject) => {
     }, 300)
 })
 
+
+
 const logout = () => {
     currentUser = undefined
     return Promise.resolve();
